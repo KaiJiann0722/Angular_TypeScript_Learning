@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Rooom } from './rooms';
 
 @Component({
   selector: 'app-rooms',
@@ -12,6 +13,12 @@ export class RoomsComponent implements OnInit {
   numberOfRooms = 50;
 
   hideRoooms = false;
+
+  rooms: Rooom = {
+    totalRooms: 20,
+    availableRooms: 10,
+    bookedRooms: 5
+  };
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
