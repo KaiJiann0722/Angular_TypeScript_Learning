@@ -28,7 +28,8 @@ export class RoomsComponent implements OnInit {
       amenities: 'Air conditionar, Free Wifi',
       price: 500,
       checkInTime: new Date('11-Aug-2025'),
-      checkOutTime: new Date('12-Aug-2025')  
+      checkOutTime: new Date('12-Aug-2025'),
+      rating: 4.5
     },
     {
       roomNumber: 2,
@@ -36,7 +37,8 @@ export class RoomsComponent implements OnInit {
       amenities: 'Air conditionar, Free Wifi',
       price: 1000,
       checkInTime: new Date('11-Aug-2025'),
-      checkOutTime: new Date('12-Aug-2025')  
+      checkOutTime: new Date('12-Aug-2025'),
+      rating: 2.6
     },
   ]
 
