@@ -6,7 +6,10 @@
 </div>
 
 <!-- *ngIf -->
-<div *ngIf="rooms.availableRooms > 0">
+ <!-- optional chaining/nullish coalescing -->
+{{emptyRoom.availableRooms ?? "No Rooms"}}
+
+<div *ngIf="(rooms?.availableRooms ?? 0) > 0">
     Room List {{rooms.availableRooms}}
 </div>
 
