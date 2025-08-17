@@ -1,5 +1,11 @@
 <h1>Hello World.</h1>
 
+<app-container>
+    <app-rooms></app-rooms>
+    <app-employee></app-employee>
+    <h1>This is from ng-container</h1>
+</app-container>
+
 <!-- ngSwitch -->
 <div [ngSwitch]="role">
   <div *ngSwitchCase="'User'">
@@ -7,7 +13,7 @@
   </div>
   <div *ngSwitchCase="'Admin'">
       Welcome Admin !!
-      <app-rooms></app-rooms>
+      <!-- <app-rooms></app-rooms> -->
 
   </div>
   <div *ngSwitchDefault="">
