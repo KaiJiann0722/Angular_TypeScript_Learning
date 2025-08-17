@@ -1,31 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './rooms';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css',
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent implements OnInit, AfterViewInit {
   hotelName = 'Hilton Hotel';
-
+  
   numberOfRooms = 50;
-
+  
   hideRoooms = false;
-
+  
   title = 'Rooom List'
-
+  
   selectedRoom!: RoomList;
-
+  
   rooms: Room = {
     totalRooms: 20,
     availableRooms: 10,
     bookedRooms: 5,
   };
-
+  
   emptyRoom: Room = {};
-
+  
   roomList: RoomList[] = [];
+  
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent
+  
+  @ViewChildren(HeaderComponent) headerChildren!: QueryList<HeaderComponent>
 
   ngOnInit(): void {
     this.roomList = [
@@ -49,12 +54,18 @@ export class RoomsComponent implements OnInit {
       },
     ];
   }
+  
+  ngAfterViewInit(): void {
+    this.headerComponent.title = "Rooms View"
+
+    this.headerChildren.last.title = "Last Title"
+  }
 
   toggle(): void {
     this.hideRoooms = !this.hideRoooms;
     this.title = "Tan Kang Wei"
   }
-
+  
   submitRoom(room: RoomList) {
     console.log(room);
     this.selectedRoom = room;
