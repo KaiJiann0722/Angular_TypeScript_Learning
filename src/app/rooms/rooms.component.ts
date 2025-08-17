@@ -13,6 +13,8 @@ export class RoomsComponent implements OnInit {
 
   hideRoooms = false;
 
+  title = 'Rooom List'
+
   selectedRoom!: RoomList;
 
   rooms: Room = {
@@ -50,6 +52,7 @@ export class RoomsComponent implements OnInit {
 
   toggle(): void {
     this.hideRoooms = !this.hideRoooms;
+    this.title = "Tan Kang Wei"
   }
 
   submitRoom(room: RoomList) {
