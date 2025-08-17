@@ -1,26 +1,36 @@
-<p class="text-3xl font-bold underline">Welcome to {{hotelName}}</p>
+<p class="text-3xl font-bold underline">Welcome to {{ hotelName }}</p>
 
-<div [hidden] = "hideRoooms">
-    Number of Rooms:
-    <div [ngStyle]="{'color':(rooms.availableRooms ?? 0) > 0 ? 'green' : 'red'}" [innerText]="numberOfRooms"></div>
+<div [hidden]="hideRoooms">
+  Number of Rooms:
+  <div
+    [ngStyle]="{ color: (rooms.availableRooms ?? 0) > 0 ? 'green' : 'red' }"
+    [innerText]="numberOfRooms"
+  ></div>
 </div>
 
 <!-- *ngIf -->
- <!-- optional chaining/nullish coalescing -->
-{{emptyRoom.availableRooms ?? "No Rooms"}}
+<!-- optional chaining/nullish coalescing -->
+{{ emptyRoom.availableRooms ?? "No Rooms" }}
 
-{{roomList | json}}
+<!-- {{roomList | json}} -->
 
 <div>
-    Selected Room:
-    {{selectedRoom | json}}
+  Selected Room:
+  {{ selectedRoom | json }}
+</div>
+
+<div>
+  <button (click)="addRoom()">Add Room</button>
 </div>
 
 <div *ngIf="(rooms?.availableRooms ?? 0) > 0">
-    <app-room-list (selectedRoom)="submitRoom($event)" [rooms] = "roomList"></app-room-list>
-    <!-- {{roomList}} -->
-     <!-- ngFor -->
-     <!-- <table border="1">
+  <app-room-list
+    (selectedRoom)="submitRoom($event)"
+    [rooms]="roomList"
+  ></app-room-list>
+  <!-- {{roomList}} -->
+  <!-- ngFor -->
+  <!-- <table border="1">
          <tr>
             <th>No.</th>
             <th>Even/Odd</th>
@@ -45,6 +55,5 @@
          </tr>
      </table> -->
 </div>
-
 
 <button (click)="toggle()">toggle</button>
