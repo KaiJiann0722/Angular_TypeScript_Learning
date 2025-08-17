@@ -1,4 +1,4 @@
-<p>Welcome to {{hotelName}}</p>
+<p class="text-3xl font-bold underline">Welcome to {{hotelName}}</p>
 
 <div [hidden] = "hideRoooms">
     Number of Rooms:
@@ -11,11 +11,16 @@
 
 {{roomList | json}}
 
+<div>
+    Selected Room:
+    {{selectedRoom | json}}
+</div>
+
 <div *ngIf="(rooms?.availableRooms ?? 0) > 0">
-    Room List 
+    <app-room-list (selectedRoom)="submitRoom($event)" [rooms] = "roomList"></app-room-list>
     <!-- {{roomList}} -->
      <!-- ngFor -->
-     <table border="1">
+     <!-- <table border="1">
          <tr>
             <th>No.</th>
             <th>Even/Odd</th>
@@ -38,7 +43,7 @@
             <td>{{room.checkOutTime | date : 'dd/MM/yyyy'}}</td>
             <td>{{room.rating | number: '1.0-0'}}</td>
          </tr>
-     </table>
+     </table> -->
 </div>
 
 

@@ -14,6 +14,8 @@ export class RoomsComponent implements OnInit {
 
   hideRoooms = false;
 
+  selectedRoom!: RoomList;
+
   rooms: Room = {
     totalRooms: 20,
     availableRooms: 10,
@@ -22,7 +24,11 @@ export class RoomsComponent implements OnInit {
 
   emptyRoom: Room = {};
 
-  roomList: RoomList[] = [{
+  roomList: RoomList[] = []
+
+  ngOnInit(): void {
+    this.roomList = [
+      {
       roomNumber: 1,
       roomType: 'Deluxe Room',
       amenities: 'Air conditionar, Free Wifi',
@@ -40,14 +46,16 @@ export class RoomsComponent implements OnInit {
       checkOutTime: new Date('12-Aug-2025'),
       rating: 2.6
     },
-  ]
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    ]
   }
 
   toggle(): void {
     this.hideRoooms = !this.hideRoooms;
+  }
+
+  submitRoom(room: RoomList) {
+    console.log(room);
+    this.selectedRoom = room
   }
 
 }
