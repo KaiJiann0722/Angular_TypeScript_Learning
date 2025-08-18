@@ -24,6 +24,8 @@ export class RoomListComponent implements OnInit, OnChanges, OnDestroy {
 
   @Output() selectedRoom = new EventEmitter<RoomList>();
 
+  @Output() deletedRoom = new EventEmitter<string>();
+
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,5 +41,9 @@ export class RoomListComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('on destroy is called.');
+  }
+
+  deleteRoom(roomNumber: string) {
+    this.deletedRoom.emit(roomNumber);
   }
 }

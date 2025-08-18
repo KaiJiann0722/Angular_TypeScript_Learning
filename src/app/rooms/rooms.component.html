@@ -29,6 +29,7 @@
 
 <div *ngIf="hideRoooms">
   <app-room-list
+    (deletedRoom)="deleteRoom($event)"
     (selectedRoom)="submitRoom($event)"
     [rooms]="roomList"
     [title]="title"
@@ -62,3 +63,6 @@
 </div>
 
 <button (click)="toggle()">toggle</button>
+
+
+<button (click)="editRoom()">Update</button>

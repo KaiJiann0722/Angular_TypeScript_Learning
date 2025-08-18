@@ -14,6 +14,7 @@
     <th>Check Out Time</th>
     <th>Rating</th>
     <th>Select Room</th>
+    <th>Delete?</th>
   </tr>
   <tr
     [ngClass]="i + (1 % 2) == 1 ? 'odd' : 'even'"
@@ -31,6 +32,11 @@
     <td>
       <div>
         <button class="btn" (click) = "submitRoom(room)">submit</button>
+      </div>
+    </td>
+    <td>
+      <div>
+        <button (click)="deleteRoom(room.roomNumber!)">Delete</button>
       </div>
     </td>
   </tr>

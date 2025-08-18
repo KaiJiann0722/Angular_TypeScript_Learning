@@ -66,7 +66,7 @@ export class RoomsComponent implements OnInit, AfterViewInit {
 
   addRoom() {
     const room: RoomList = {
-      roomNumber: '3',
+      // roomNumber: '3',
       roomType: 'Super Deluxe Room',
       amenities: 'Good',
       price: 1500,
@@ -76,7 +76,28 @@ export class RoomsComponent implements OnInit, AfterViewInit {
     };
     // this.roomList.push(room);
 
-    this.roomList = [...this.roomList, room];
+    // this.roomList = [...this.roomList, room];
+
+    // Change to http client post method
+    this.roomsService.addRooms(room).subscribe(data => this.roomList = data);
+  }
+
+  editRoom() {
+    const room: RoomList = {
+      roomNumber: '3',
+      roomType: 'Super Deluxe Room',
+      amenities: 'Good',
+      price: 1500,
+      checkInTime: new Date('18-Aug-2025'),
+      checkOutTime: new Date('18-Aug-2025'),
+      rating: 4.5,
+    };
+
+     this.roomsService.editRoom(room).subscribe(data => this.roomList = data);
+  }
+
+  deleteRoom(roomNumber: string) {
+    this.roomsService.deleteRoom(roomNumber).subscribe(data => this.roomList = data);
   }
 }
 
