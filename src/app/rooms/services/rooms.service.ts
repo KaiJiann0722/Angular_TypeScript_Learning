@@ -4,12 +4,17 @@ import { environment } from '../../../environments/environment';
 import { APP_SERVICE_CONFIG } from '../../AppConfig/appConfig.service';
 import { AppConfig } from '../../AppConfig/appConfig.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoomsService {
   rooms: RoomList[] = [];
+
+  getRooms$ = this.httpClient.get<RoomList[]>('api/rooms').pipe(
+    shareReplay(1)
+  );
 
   constructor(
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
