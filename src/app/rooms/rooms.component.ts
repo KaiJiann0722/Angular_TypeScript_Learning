@@ -9,6 +9,7 @@ import {
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-rooms',
@@ -40,11 +41,34 @@ export class RoomsComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(HeaderComponent) headerChildren!: QueryList<HeaderComponent>;
 
+  totalBytes = 0;
+
   // roomsService = new RoomsService();
 
   constructor(private roomsService: RoomsService) {}
 
   ngOnInit(): void {
+    this.roomsService.getPhotos().subscribe((event) => {
+      switch(event.type) {
+        case HttpEventType.Sent: {
+          console.log('Request has been made');
+          break;
+        }
+        case HttpEventType.ResponseHeader: {
+          console.log('Request Success');
+          break;
+        }
+        case HttpEventType.DownloadProgress: {
+          this.totalBytes += event.loaded;
+          break;
+        }
+        case HttpEventType.Response: {
+          console.log("Request Comple");
+          break;
+        }
+      }
+    })
+
     this.roomsService.getRooms().subscribe((rooms) => (this.roomList = rooms));
   }
 
@@ -99,6 +123,7 @@ export class RoomsComponent implements OnInit, AfterViewInit {
   deleteRoom(roomNumber: string) {
     this.roomsService.deleteRoom(roomNumber).subscribe(data => this.roomList = data);
   }
+
 }
 
 // this.roomList = [
