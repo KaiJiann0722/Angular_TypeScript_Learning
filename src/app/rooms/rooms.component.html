@@ -29,6 +29,10 @@
   <button (click)="addRoom()">Add Room</button>
 </div>
 
+<h1>Room Count: {{roomsCount$ | async}}</h1>
+
+<h1>{{getError$ | async}}</h1>
+
 <div *ngIf="rooms$ | async as room">
   <app-room-list
     (deletedRoom)="deleteRoom($event)"

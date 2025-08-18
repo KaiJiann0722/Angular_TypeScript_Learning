@@ -11,7 +11,7 @@ import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { HttpEventType } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { catchError, map, of, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rooms',
@@ -47,9 +47,23 @@ export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // roomsService = new RoomsService();
 
+  err$: Subject<string> = new Subject<string>();
+
+  getError$ = this.err$.asObservable();
+
   subscription!: Subscription
 
-  rooms$ = this.roomsService.getRooms$;
+  rooms$ = this.roomsService.getRooms$.pipe(
+    catchError((err) => {
+      // console.log(err);
+      this.err$.next(err.message);
+      return of([]);
+    })
+  );
+
+  roomsCount$ = this.roomsService.getRooms$.pipe(
+    map(roomCount => roomCount.length)
+  )
 
   constructor(private roomsService: RoomsService) {}
 
