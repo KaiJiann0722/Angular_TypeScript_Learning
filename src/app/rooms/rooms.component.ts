@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
@@ -32,27 +33,34 @@ export class RoomsComponent implements OnInit, AfterViewInit {
   
   @ViewChildren(HeaderComponent) headerChildren!: QueryList<HeaderComponent>
 
+  // roomsService = new RoomsService();
+
+  constructor(private roomsService: RoomsService) {
+
+  }
+
   ngOnInit(): void {
-    this.roomList = [
-      {
-        roomNumber: 1,
-        roomType: 'Deluxe Room',
-        amenities: 'Air conditionar, Free Wifi',
-        price: 500,
-        checkInTime: new Date('11-Aug-2025'),
-        checkOutTime: new Date('12-Aug-2025'),
-        rating: 4.5,
-      },
-      {
-        roomNumber: 2,
-        roomType: 'Private Suite',
-        amenities: 'Air conditionar, Free Wifi',
-        price: 1000,
-        checkInTime: new Date('11-Aug-2025'),
-        checkOutTime: new Date('12-Aug-2025'),
-        rating: 2.6,
-      },
-    ];
+    // this.roomList = [
+    //   {
+    //     roomNumber: 1,
+    //     roomType: 'Deluxe Room',
+    //     amenities: 'Air conditionar, Free Wifi',
+    //     price: 500,
+    //     checkInTime: new Date('11-Aug-2025'),
+    //     checkOutTime: new Date('12-Aug-2025'),
+    //     rating: 4.5,
+    //   },
+    //   {
+    //     roomNumber: 2,
+    //     roomType: 'Private Suite',
+    //     amenities: 'Air conditionar, Free Wifi',
+    //     price: 1000,
+    //     checkInTime: new Date('11-Aug-2025'),
+    //     checkOutTime: new Date('12-Aug-2025'),
+    //     rating: 2.6,
+    //   },
+    // ];
+    this.roomList = this.roomsService.getRooms();
   }
   
   ngAfterViewInit(): void {
