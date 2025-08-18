@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  OnDestroy,
   OnInit,
   QueryList,
   ViewChild,
@@ -10,13 +11,14 @@ import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { HttpEventType } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrl: './rooms.component.css',
 })
-export class RoomsComponent implements OnInit, AfterViewInit {
+export class RoomsComponent implements OnInit, AfterViewInit, OnDestroy {
   hotelName = 'Hilton Hotel';
 
   numberOfRooms = 50;
@@ -45,6 +47,10 @@ export class RoomsComponent implements OnInit, AfterViewInit {
 
   // roomsService = new RoomsService();
 
+  subscription!: Subscription
+
+  rooms$ = this.roomsService.getRooms$;
+
   constructor(private roomsService: RoomsService) {}
 
   ngOnInit(): void {
@@ -69,13 +75,19 @@ export class RoomsComponent implements OnInit, AfterViewInit {
       }
     })
 
-    this.roomsService.getRooms$.subscribe((rooms) => (this.roomList = rooms));
+    // this.roomsService.getRooms$.subscribe((rooms) => (this.roomList = rooms));
   }
 
   ngAfterViewInit(): void {
     this.headerComponent.title = 'Rooms View';
 
     this.headerChildren.last.title = 'Last Title';
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   toggle(): void {
