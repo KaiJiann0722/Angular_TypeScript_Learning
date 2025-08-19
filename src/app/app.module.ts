@@ -10,6 +10,15 @@ import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { API_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appConfig.service';
 import { HttpClientModule } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppNavComponent } from './app-nav/app-nav.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
 
 @NgModule({
   declarations: [
@@ -18,18 +27,27 @@ import { HttpClientModule } from '@angular/common/http';
     RoomListComponent,
     HeaderComponent,
     ContainerComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    AppNavComponent,
+    NotfoundComponent,
+    RoomsBookingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [
     {
       provide: APP_SERVICE_CONFIG,
       useValue: API_CONFIG,
-    }
+    },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

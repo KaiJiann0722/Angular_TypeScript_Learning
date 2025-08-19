@@ -31,7 +31,10 @@
     <td>{{ room.rating | number : "1.0-0" }}</td>
     <td>
       <div>
-        <button class="btn" (click) = "submitRoom(room)">submit</button>
+        <!-- <button class="btn" (click) = "submitRoom(room)">submit</button> -->
+         <button [routerLink]="['/rooms', room.roomNumber]">
+          Book
+         </button>
       </div>
     </td>
     <td>
