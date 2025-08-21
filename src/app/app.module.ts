@@ -21,6 +21,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
 import { RoomsAddComponent } from './rooms/rooms-add/rooms-add.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { HoverDirective } from './hover.directive';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { FormsModule } from '@angular/forms';
     AppNavComponent,
     NotfoundComponent,
     RoomsBookingComponent,
-    RoomsAddComponent
+    RoomsAddComponent,
+    LoginComponent,
+    HoverDirective
   ],
   imports: [
     BrowserModule,
