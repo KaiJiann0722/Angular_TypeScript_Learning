@@ -1,12 +1,17 @@
 <form>
   <div>
     <input
+      #emailControl="ngModel"
+      appEmailvalidator
       appHover="green"
       [(ngModel)]="email"
       type="email"
       name="email"
       placeholder="Please provide your email"
     />
+    <div>
+      {{ emailControl.errors | json }}
+    </div>
   </div>
   <div>
     <input
