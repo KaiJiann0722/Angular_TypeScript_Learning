@@ -1,0 +1,55 @@
+{{successMessage}}
+
+<form (ngSubmit)="addRoom()">
+  <div class="form-group">
+    <input
+      type="text"
+      name="roomType"
+      placeholder="Room Type"
+      [(ngModel)]="rooms.roomType"
+    />
+  </div>
+  <div>
+    <input
+      type="text"
+      name="amenities"
+      placeholder="Amenities"
+      [(ngModel)]="rooms.amenities"
+    />
+  </div>
+  <div>
+    <input
+      type="number"
+      name="price"
+      placeholder="Room Price"
+      [(ngModel)]="rooms.price"
+    />
+  </div>
+  <div>
+    <input
+      type="datetime"
+      name="checkInTime"
+      placeholder="check In Time"
+      [(ngModel)]="rooms.checkInTime"
+    />
+  </div>
+  <div>
+    <input
+      type="datetime"
+      name="checkOutTime"
+      placeholder="check Out Time"
+      [(ngModel)]="rooms.checkOutTime"
+    />
+  </div>
+  <div>
+    <input
+      type="number"
+      name="rating"
+      placeholder="Rating"
+      [(ngModel)]="rooms.rating"
+    />
+  </div>
+  <div>
+    <button>Submit</button>
+  </div>
+</form>
