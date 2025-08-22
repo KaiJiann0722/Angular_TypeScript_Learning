@@ -26,7 +26,8 @@
 </div>
 
 <div>
-  <button (click)="addRoom()">Add Room</button>
+  <!-- <button (click)="addRoom()">Add Room</button> -->
+   <button routerLink="roomsAdd">Add Room</button>
 </div>
 
 <h1>Room Count: {{roomsCount$ | async}}</h1>
@@ -72,3 +73,5 @@
 
 
 <button (click)="editRoom()">Update</button>
+
+<router-outlet></router-outlet>
