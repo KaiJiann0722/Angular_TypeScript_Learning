@@ -35,7 +35,7 @@ import { HeaderModule } from './header/header.module';
   ],
   imports: [
     BrowserModule,
-    RoomsModule,
+    // RoomsModule,
     AppRoutingModule,
     HttpClientModule,
     MatToolbarModule,
