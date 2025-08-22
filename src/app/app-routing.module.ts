@@ -13,18 +13,6 @@ const routes: Routes = [
     component: EmployeeComponent,
   },
   {
-    path: 'rooms',
-    component: RoomsComponent,
-  },
-  {
-    path: 'rooms/roomsAdd',
-    component: RoomsAddComponent
-  },
-  {
-    path: 'rooms/:id',
-    component: RoomsBookingComponent,
-  },
-  {
     path: 'login',
     component: LoginComponent,
   },

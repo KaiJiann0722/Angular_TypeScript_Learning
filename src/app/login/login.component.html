@@ -9,7 +9,7 @@
       name="email"
       placeholder="Please provide your email"
     />
-    <div>
+    <div *ngIf="emailControl.errors !== null">
       {{ emailControl.errors | json }}
     </div>
   </div>

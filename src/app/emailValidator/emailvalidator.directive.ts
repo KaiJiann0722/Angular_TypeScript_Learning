@@ -15,7 +15,7 @@ export class EmailvalidatorDirective implements Validator {
     const value = control.value as string;
     if(value.includes('test')) {
       return {
-        validEmail: "true"
+        invalidEmail: true
       }
     }
     return null
