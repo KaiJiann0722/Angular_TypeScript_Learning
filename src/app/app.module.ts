@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailvalidatorDirective } from './emailValidator/emailvalidator.directive';
-import { RoomsModule } from './rooms/rooms.module';
 import { HeaderModule } from './header/header.module';
 
 @NgModule({
