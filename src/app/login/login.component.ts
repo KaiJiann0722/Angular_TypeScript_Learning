@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,13 @@ export class LoginComponent implements OnInit {
 
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {}
 
   login(): void {
-    if (this.email === 'admin@gmail.com' && this.password === 'Admin') {
-      // this.router.navigateByUrl('/rooms/add')
-      this.router.navigate(['/rooms', 'add']);
-    }
+     if(this.loginService.login(this.email, this.password)) {
+        this.router.navigateByUrl('/rooms')
+     }
   }
 }
