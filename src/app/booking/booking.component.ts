@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -21,8 +21,8 @@ export class BookingComponent implements OnInit {
 
   initForm() {
     this.bookingForm = this.formBuilder.group({
-      roomId: [''],
-      guestEmail: [''],
+      roomId: ['', [Validators.required]],
+      guestEmail: ['', [Validators.required, Validators.email]],
       checkinDate: [''],
       checkoutDate: [''],
       bookingStatus: [''],
@@ -38,11 +38,13 @@ export class BookingComponent implements OnInit {
         zipCode: [''],
       }),
       guests: this.formBuilder.array([this.addGuestControl()]),
+      tnc: new FormControl(false, [Validators.requiredTrue])
     });
   }
 
   addBooking() {
     console.log(this.bookingForm.value);
+    this.bookingForm.reset();
   }
 
   addGuest() {
@@ -51,7 +53,7 @@ export class BookingComponent implements OnInit {
 
   addGuestControl() {
     return this.formBuilder.group({
-      guestName: new FormControl(''),
+      guestName: ['', [Validators.required]],
     });
   }
 

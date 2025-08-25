@@ -63,6 +63,16 @@
       formControlName="guestEmail"
       placeholder="Guest Email"
     />
+    <mat-error
+      *ngIf="
+        bookingForm.get('guestEmail')?.hasError('email') &&
+        !bookingForm.get('guestEmail')?.hasError('required')
+      "
+      >Please enter a valid email address</mat-error
+    >
+    <mat-error *ngIf="bookingForm.get('guestEmail')?.hasError('required')"
+      >Email is <strong>required</strong></mat-error
+    >
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>mobile Number</mat-label>
@@ -226,6 +236,10 @@
                 formControlName="guestName"
                 placeholder="guestName"
               />
+              <mat-error
+                *ngIf="bookingForm.get(['guests', i, 'guestName'])?.hasError('required')"
+                >Guest Name is <strong>required</strong></mat-error
+              >
             </mat-form-field>
 
             <button
@@ -242,7 +256,14 @@
     </mat-accordion>
   </div>
   <div>
-    <button mat-raised-button color="primary">Book Room</button>
+    <mat-checkbox class="example-margin" formControlName="tnc"
+      >TnC</mat-checkbox
+    >
+  </div>
+  <div>
+    <button mat-raised-button color="primary" [disabled]="bookingForm.invalid">
+      Book Room
+    </button>
   </div>
 </form>
 
