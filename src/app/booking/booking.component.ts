@@ -17,6 +17,30 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.getBookingData();
+  }
+
+  getBookingData() {
+    this.bookingForm.setValue({
+      roomId: '',
+      guestEmail: 'test@gmail.com',
+      checkinDate: new Date(),
+      checkoutDate: '',
+      bookingStatus: '',
+      bookingAmount: '',
+      bookingDate: '',
+      mobileNumber: '',
+      address: this.formBuilder.group({
+        addressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        country: '',
+        zipCode: '',
+      }),
+      guests: [],
+      tnc: false
+    })
   }
 
   initForm() {
