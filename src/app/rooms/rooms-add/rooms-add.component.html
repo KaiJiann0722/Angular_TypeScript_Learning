@@ -1,21 +1,22 @@
-{{roomsForm.pristine | json}}
-{{roomsForm.dirty | json}}
+{{ roomsForm.pristine | json }}
+{{ roomsForm.dirty | json }}
 
-<div *ngIf="successMessage !== ''">{{successMessage}}</div>
+<div *ngIf="successMessage !== ''">{{ successMessage }}</div>
 
 <form #roomsForm="ngForm" (ngSubmit)="addRoom(roomsForm)">
   <div class="form-group">
     <input
-    required
+      required
       type="text"
       name="roomType"
       placeholder="Room Type"
       [(ngModel)]="rooms.roomType"
+      [ngModelOptions]="{ updateOn: 'blur' }"
     />
   </div>
   <div>
     <input
-    required
+      required
       #roomAmenities="ngModel"
       minlength="5"
       maxlength="20"
@@ -24,16 +25,16 @@
       placeholder="Amenities"
       [(ngModel)]="rooms.amenities"
     />
-    <div *ngIf="roomAmenities.errors?.['minlength']"> 
+    <div *ngIf="roomAmenities.errors?.['minlength']">
       Amenities should be min 5 characters.
     </div>
-    <div *ngIf="roomAmenities.dirty && roomAmenities.errors?.['required']"> 
+    <div *ngIf="roomAmenities.dirty && roomAmenities.errors?.['required']">
       Please provide room amenities
     </div>
   </div>
   <div>
     <input
-    required
+      required
       type="number"
       name="price"
       placeholder="Room Price"
@@ -42,7 +43,7 @@
   </div>
   <div>
     <input
-    required
+      required
       type="datetime"
       name="checkInTime"
       placeholder="check In Time"
@@ -51,7 +52,7 @@
   </div>
   <div>
     <input
-    required
+      required
       type="datetime"
       name="checkOutTime"
       placeholder="check Out Time"
@@ -60,7 +61,7 @@
   </div>
   <div>
     <input
-    required
+      required
       type="number"
       name="rating"
       placeholder="Rating"

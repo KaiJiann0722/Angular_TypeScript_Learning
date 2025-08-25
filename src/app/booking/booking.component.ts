@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -18,10 +24,14 @@ export class BookingComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.getBookingData();
+
+    this.bookingForm.valueChanges.subscribe((data) => {
+      console.log(data);
+    });
   }
 
   getBookingData() {
-    this.bookingForm.setValue({
+    this.bookingForm.patchValue({
       roomId: '',
       guestEmail: 'test@gmail.com',
       checkinDate: new Date(),
@@ -39,20 +49,28 @@ export class BookingComponent implements OnInit {
         zipCode: '',
       }),
       guests: [],
-      tnc: false
-    })
+      tnc: false,
+    });
   }
 
   initForm() {
     this.bookingForm = this.formBuilder.group({
       roomId: ['', [Validators.required]],
-      guestEmail: ['', [Validators.required, Validators.email]],
+      guestEmail: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          updateOn: 'blur'
+        },
+      ],
       checkinDate: [''],
       checkoutDate: [''],
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
-      mobileNumber: [''],
+      mobileNumber: ['', {
+        updateOn: 'blur'
+      }],
       address: this.formBuilder.group({
         addressLine1: [''],
         addressLine2: [''],
@@ -62,8 +80,8 @@ export class BookingComponent implements OnInit {
         zipCode: [''],
       }),
       guests: this.formBuilder.array([this.addGuestControl()]),
-      tnc: new FormControl(false, [Validators.requiredTrue])
-    });
+      tnc: new FormControl(false, [Validators.requiredTrue]),
+    }, {updateOn: 'blur'});
   }
 
   addBooking() {
