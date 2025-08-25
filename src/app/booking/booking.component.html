@@ -1,7 +1,25 @@
 {{ bookingForm.value | json }}
 {{ bookingForm.pristine | json }}
 {{ bookingForm.dirty | json }}
-{{guests}}
+
+<div>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="addPassport()"
+  >
+    Add Passport
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="removePassport()"
+  >
+    Remove Passport
+  </button>
+</div>
 
 <form
   class=".example-form"
@@ -9,6 +27,18 @@
   #emailFormControl="ngForm"
   (ngSubmit)="addBooking()"
 >
+  <mat-form-field
+    class="example-full-width"
+    *ngIf="bookingForm.get('passport')"
+  >
+    <mat-label>Passport</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="passport"
+      placeholder="passport"
+    />
+  </mat-form-field>
   <mat-form-field class="example-full-width">
     <mat-label>Room Id</mat-label>
     <input
@@ -83,22 +113,43 @@
 
   <mat-form-field class="example-full-width">
     <mat-label>Check In Date</mat-label>
-    <input matInput [matDatepicker]="checkinPicker" formControlName="checkinDate" />
-    <mat-datepicker-toggle matIconSuffix [for]="checkinPicker"></mat-datepicker-toggle>
+    <input
+      matInput
+      [matDatepicker]="checkinPicker"
+      formControlName="checkinDate"
+    />
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="checkinPicker"
+    ></mat-datepicker-toggle>
     <mat-datepicker #checkinPicker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Check Out Date</mat-label>
-    <input matInput [matDatepicker]="checkOutPicker" formControlName="checkoutDate" />
-    <mat-datepicker-toggle matIconSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
+    <input
+      matInput
+      [matDatepicker]="checkOutPicker"
+      formControlName="checkoutDate"
+    />
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="checkOutPicker"
+    ></mat-datepicker-toggle>
     <mat-datepicker #checkOutPicker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Booking Date</mat-label>
-    <input matInput [matDatepicker]="bookingPicker" formControlName="bookingDate" />
-    <mat-datepicker-toggle matIconSuffix [for]="bookingPicker"></mat-datepicker-toggle>
+    <input
+      matInput
+      [matDatepicker]="bookingPicker"
+      formControlName="bookingDate"
+    />
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="bookingPicker"
+    ></mat-datepicker-toggle>
     <mat-datepicker #bookingPicker></mat-datepicker>
   </mat-form-field>
 
@@ -176,6 +227,15 @@
                 placeholder="guestName"
               />
             </mat-form-field>
+
+            <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              (click)="removeGuest(i)"
+            >
+              Remove Guest
+            </button>
           </div>
         </div>
       </mat-expansion-panel>

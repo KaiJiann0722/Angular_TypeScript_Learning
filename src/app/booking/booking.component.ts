@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-booking',
@@ -13,10 +13,13 @@ export class BookingComponent implements OnInit {
     return this.bookingForm.get('guests') as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
     this.bookingForm = this.formBuilder.group({
       roomId: [''],
       guestEmail: [''],
@@ -34,13 +37,8 @@ export class BookingComponent implements OnInit {
         country: [''],
         zipCode: [''],
       }),
-      guests: this.formBuilder.array([
-        this.formBuilder.group({
-          guestName: [''],
-        }),
-      ]),
+      guests: this.formBuilder.array([this.addGuestControl()]),
     });
-    console.log(this.guests.controls);
   }
 
   addBooking() {
@@ -48,11 +46,26 @@ export class BookingComponent implements OnInit {
   }
 
   addGuest() {
-    this.guests.controls.push(
-      this.formBuilder.group({
-        guestName: [''],
-      })
-    );
+    this.guests.push(this.addGuestControl());
   }
-  
+
+  addGuestControl() {
+    return this.formBuilder.group({
+      guestName: new FormControl(''),
+    });
+  }
+
+  addPassport() {
+    this.bookingForm.addControl('passport', new FormControl(''));
+  }
+
+  removePassport() {
+    if (this.bookingForm.get('passport')) {
+      this.bookingForm.removeControl('passport');
+    }
+  }
+
+  removeGuest(index: number) {
+    this.guests.removeAt(index);
+  }
 }
