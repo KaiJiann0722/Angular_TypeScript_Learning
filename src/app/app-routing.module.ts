@@ -4,12 +4,14 @@ import { EmployeeComponent } from './employee/employee.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { LoginComponent } from './login/login.component';
 import { loginGuard } from './guards/login.guard';
+import { BookingModule } from './booking/booking.module';
+import { BookingComponent } from './booking/booking.component';
 
 const routes: Routes = [
   {
     path: 'employee',
     component: EmployeeComponent,
-    canActivate: [loginGuard]
+    canActivate: [loginGuard],
   },
   {
     path: 'login',
@@ -17,19 +19,19 @@ const routes: Routes = [
   },
   {
     path: 'rooms',
-    loadChildren: () => import('./rooms/rooms.module').then(m => m.RoomsModule),
-    canActivate: [loginGuard]
+    loadChildren: () =>
+      import('./rooms/rooms.module').then((m) => m.RoomsModule),
+    // canActivate: [loginGuard]
   },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
   },
-  { path: 'booking', loadChildren: () => import('./booking/booking.module').then(m => m.BookingModule), canActivate: [loginGuard] },
   {
     path: '**',
     component: NotfoundComponent,
-    canActivate: [loginGuard]
+    // canActivate: [loginGuard]
   },
 ];
 
@@ -37,4 +39,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailvalidatorDirective } from './emailValidator/emailvalidator.directive';
 import { HeaderModule } from './header/header.module';
+import { BookingModule } from './booking/booking.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HeaderModule } from './header/header.module';
   imports: [
     BrowserModule,
     // RoomsModule,
+    BookingModule,
     AppRoutingModule,
     HttpClientModule,
     MatToolbarModule,
@@ -50,6 +52,7 @@ import { HeaderModule } from './header/header.module';
       provide: APP_SERVICE_CONFIG,
       useValue: API_CONFIG,
     },
+    
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
