@@ -15,7 +15,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
-    BookingComponent
+    BookingComponent,
   ],
   imports: [
     CommonModule,

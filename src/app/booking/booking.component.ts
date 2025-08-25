@@ -6,6 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { BookingService } from './booking.service';
+import { mergeMap } from 'rxjs';
+import { Custom_Validator } from './CustomValidator/custom-validator';
 
 @Component({
   selector: 'app-booking',
@@ -19,15 +22,19 @@ export class BookingComponent implements OnInit {
     return this.bookingForm.get('guests') as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private bookingService: BookingService) {}
 
   ngOnInit(): void {
     this.initForm();
     this.getBookingData();
 
-    this.bookingForm.valueChanges.subscribe((data) => {
-      console.log(data);
-    });
+    // this.bookingForm.valueChanges.subscribe((data) => {
+    //   this.bookingService.bookRoom(data).subscribe(data => console.log(data))
+    // });
+
+      this.bookingForm.valueChanges.pipe(
+        mergeMap((data) => this.bookingService.bookRoom(data))
+      ).subscribe(data => console.log(data));
   }
 
   getBookingData() {
@@ -81,12 +88,16 @@ export class BookingComponent implements OnInit {
       }),
       guests: this.formBuilder.array([this.addGuestControl()]),
       tnc: new FormControl(false, [Validators.requiredTrue]),
-    }, {updateOn: 'blur'});
+    }, {updateOn: 'blur', validators: [Custom_Validator.validateDate]});
   }
 
   addBooking() {
     console.log(this.bookingForm.value);
-    this.bookingForm.reset();
+
+    // this.bookingService.bookRoom(this.bookingForm.getRawValue()).subscribe(data => {
+    //     console.log(data);
+    // })
+    // this.bookingForm.reset();
   }
 
   addGuest() {
@@ -95,7 +106,7 @@ export class BookingComponent implements OnInit {
 
   addGuestControl() {
     return this.formBuilder.group({
-      guestName: ['', [Validators.required]],
+      guestName: ['', [Validators.required, Custom_Validator.validateName]],
     });
   }
 

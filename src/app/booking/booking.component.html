@@ -149,6 +149,10 @@
     <mat-datepicker #checkOutPicker></mat-datepicker>
   </mat-form-field>
 
+  <div *ngIf="!bookingForm.hasError('dateRangeInvalid')">
+    ❌ Check-in date must be before Check-out date
+  </div>
+
   <mat-form-field class="example-full-width">
     <mat-label>Booking Date</mat-label>
     <input
@@ -237,8 +241,20 @@
                 placeholder="guestName"
               />
               <mat-error
-                *ngIf="bookingForm.get(['guests', i, 'guestName'])?.hasError('required')"
+                *ngIf="
+                  bookingForm
+                    .get(['guests', i, 'guestName'])
+                    ?.hasError('required')
+                "
                 >Guest Name is <strong>required</strong></mat-error
+              >
+              <mat-error
+                *ngIf="
+                  bookingForm
+                    .get(['guests', i, 'guestName'])
+                    ?.hasError('invalidName')
+                "
+                >Guest Name is <strong>invalid</strong></mat-error
               >
             </mat-form-field>
 
