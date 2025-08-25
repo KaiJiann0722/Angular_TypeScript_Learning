@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { loginGuard } from './guards/login.guard';
 import { BookingModule } from './booking/booking.module';
 import { BookingComponent } from './booking/booking.component';
+import { bookingGuard } from './booking/guards/booking.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +22,12 @@ const routes: Routes = [
     path: 'rooms',
     loadChildren: () =>
       import('./rooms/rooms.module').then((m) => m.RoomsModule),
+    // canActivate: [loginGuard]
+  },
+  {
+    path: 'booking/:id',
+    component: BookingComponent,
+    canDeactivate: [bookingGuard]
     // canActivate: [loginGuard]
   },
   {

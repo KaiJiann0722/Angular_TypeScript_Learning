@@ -149,7 +149,7 @@
     <mat-datepicker #checkOutPicker></mat-datepicker>
   </mat-form-field>
 
-  <div *ngIf="!bookingForm.hasError('dateRangeInvalid')">
+  <div *ngIf="bookingForm.get('checkinDate')?.dirty && bookingForm.get('checkoutDate')?.dirty && !bookingForm.hasError('dateRangeInvalid')">
     ❌ Check-in date must be before Check-out date
   </div>
 

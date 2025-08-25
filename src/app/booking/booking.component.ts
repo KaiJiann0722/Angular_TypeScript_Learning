@@ -9,6 +9,7 @@ import {
 import { BookingService } from './booking.service';
 import { mergeMap } from 'rxjs';
 import { Custom_Validator } from './CustomValidator/custom-validator';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -18,13 +19,16 @@ import { Custom_Validator } from './CustomValidator/custom-validator';
 export class BookingComponent implements OnInit {
   bookingForm!: FormGroup;
 
+  roomId: string = '';
+
   get guests(): FormArray {
     return this.bookingForm.get('guests') as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder, private bookingService: BookingService) {}
+  constructor(private formBuilder: FormBuilder, private bookingService: BookingService, private router: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.roomId = this.router.snapshot.params['id']
     this.initForm();
     this.getBookingData();
 
@@ -39,7 +43,6 @@ export class BookingComponent implements OnInit {
 
   getBookingData() {
     this.bookingForm.patchValue({
-      roomId: '',
       guestEmail: 'test@gmail.com',
       checkinDate: new Date(),
       checkoutDate: '',
@@ -62,7 +65,7 @@ export class BookingComponent implements OnInit {
 
   initForm() {
     this.bookingForm = this.formBuilder.group({
-      roomId: ['', [Validators.required]],
+      roomId: [this.roomId, [Validators.required]],
       guestEmail: [
         '',
         {
